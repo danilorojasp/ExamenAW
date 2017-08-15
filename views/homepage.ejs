@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--STYLES-->
+    <link rel="stylesheet" href="/styles/importer.css">
+    <!--STYLES END-->
+  </head>
+
+  <body>
+
+    <% if (req.session.me) { %>
+      <div class="container">
+          <h1>Bienvenido! Elige tus ingredientes de Pizza</h1>
+          <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="drop">Ingredientes
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li><a href="#" value=1>Peperoni 1.00</a></li>
+              <li><a href="#" value=2>Champiñones 2.00</a></li>
+              <li><a href="#" value=3>Extra Queso 3.00</a></li>
+              
+              <p></p>
+              <p></p>
+              <p></p>
+              <p id="TotalPrice" value=0></p>
+              <script>
+                  function myFunction() {
+                    var e = document.getElementById("drop");
+                    var value = e.options[e.selectedIndex].value;
+                    var TotalPrice=document.getElementById("TotalPrice").value;
+                    TotalPrice=TotalPrice+value;
+                      document.getElementById("TotalPrice").innerHTML = "El precio Total es: " + TotalPrice ;
+                      document.getElementById("TotalPrice").value=TotalPrice;
+                    }
+                  </script>
+            </ul>
+            <button onclick="sumPrice()">Agregar a mi Pizza</button>
+          </div>
+        </div>
+    <a href="/logout">Logout</a>
+    <% } else { %>
+    <h1>Bienvenido! porfavor logeate o registrate</h1>
+    <a href="/login">Login</a> | <a href="/signup">Signup</a>
+    <% } %>
+
+
+    <!--SCRIPTS-->
+    <script src="/js/dependencies/sails.io.js"></script>
+    <!--SCRIPTS END-->
+  </body>
+</html>
